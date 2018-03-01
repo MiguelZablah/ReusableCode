@@ -1,6 +1,6 @@
 import './videoInitPlugIns';
 
-function vidCatego(id, validation, vidNames, poster, catego) {
+function videoP(id, validation, vidNames, poster, catego) {
     // Gets clubName
     var clubName = poster.split("sites/").pop().split("/")[0];
     if (validation == "playVid") {

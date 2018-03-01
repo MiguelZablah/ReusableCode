@@ -25,7 +25,7 @@ Install
 ```html
 <!-- Add cookies JS -->
 <script src="likesAndRating-min.js"></script>
-<script src="likesAndRating.css"></script>
+<link rel="stylesheet" type="text/css" href="likesAndRating.css" />
 ```
 
 Add firebase configuration
@@ -82,6 +82,87 @@ $(document).ready(function() {
         });
     }
 });
+```
+
+## Video Player (Supports MP4 and MP3)
+
+Requierd Css
+```html
+<!-- Font Awesome CDN -->
+<script src="https://use.fontawesome.com/ceaa390e68.js"></script>
+```
+
+Install
+```html
+<!-- Add Video Player PlugIns JS and CSS -->
+<script src="videoPlayerPlugIns-min.js"></script>
+<link rel="stylesheet" type="text/css" href="videoPlayerPlugIns.css" />
+<!-- Add Video Player JS -->
+<script src="videoPlayers-min.js"></script>
+```
+
+Usage using Razor for display an array of items Example
+
+Razor
+```javascript
+@{
+// VideoPlayer array for mp4
+    // Creates a list for all video url (in case more than 1 resolution)
+    var videos = new List<string>();
+    // Add each mp4 url to list
+    foreach (var video in Model.(item))
+    {
+	    if (video.(url).Contains(".mp4"))
+	    {
+		    videos.Add(@video.(name));
+	    }
+    }
+}
+
+
+// Assume code will be inside a foreach with html items 
+var isVideo = false; // Check if is .mp4
+var sinlgeVideo = new List<string>(); // For multiple resolutions
+foreach (var vid in videos)
+{
+    // If its a video add
+    if (vid.Contains(clubItem.Name))
+    {
+        // Add all resolutions of that video
+        sinlgeVideo.Add(@vid);
+        isVideo = true;
+    }
+}
+```
+
+Html
+```html
+<!-- Add a parrent div to encapsulate code -->
+<div>
+    <!-- Container for video rendering -->
+    <div id="vidItem-(item-name)">
+    </div>
+    <!-- Img to show when video not jet click -->
+    <!-- Requierd class 'imgItem' for hide when video render -->
+    <!-- Requierd class whith the '(item-name)' to know specific img for vid -->
+    <img class="imgItem (item-name)" src="item-url" alt="...">
+    
+    <!-- Requierd class 'imgItem' for hide when video render -->
+    <div class="card-img-text-container imgItem (item-name)">
+        <!-- Play btn with onClik for Video Player -->
+        <!-- Calls function 'videoP()' -->
+        <i class="fa fa-play-circle" OnClick="videoP('(item-name)',
+            <!-- if mp4 send 'playVide' else(asumes it's a mp3) 'playSong'  -->
+            '@(isVideo ? "playVid" : "playSong")', 
+            <!-- Sends if it has more than 1 resolution (if mp3 sends only 1)  -->
+            '@string.Join("^-^", sinlgeVideo)', 
+            <!-- Send Img Url  -->
+            'item-url', 
+            <!-- Send Category from witch item is  -->
+            'item-category">
+        </i>
+    </div>
+</div>
 ```
 
 ## Cookies

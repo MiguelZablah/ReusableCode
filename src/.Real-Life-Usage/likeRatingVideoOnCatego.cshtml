@@ -1,0 +1,191 @@
+@using Clubber.Mvc.Utils
+@model Clubber.Backend.Models.ClubZone
+@using WURFL
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = this.ContentRelativeToView("_LayoutSite_2.cshtml");
+    var pageCounter=0;
+    var totalItems= 1;
+    var pageCounterGlobal=1;
+    var count=1;
+    var home=@Url.Action("Index", "Memberzone");
+    var catego= Model.Name;
+    var itemsPerPage=10;
+}
+
+@{
+	var device = WURFLManagerBuilder.Instance.GetDeviceForRequest(Request.UserAgent, MatchMode.Performance);
+	var categories = Model.Club.ClubZones.Where(cz => cz.IsEnabled);
+	if (bool.Parse(device.GetVirtualCapability("is_ios")))
+	{
+		categories = categories.Where(cz => cz.Description != "APK");
+	}
+}
+
+@{
+// VideoSongsCatego
+	var videos = new List<string>();
+    foreach (var video in Model.ClubItems)
+    {
+	    if (video.FileUrl.Contains(".mp4"))
+	    {
+		    videos.Add(@video.Name);
+	    }
+    }
+}
+
+@{
+// IfSub
+    var MainCat = Model.Name.Contains("Series") ? true : false;
+    var subCat = Model.Name.Contains("Sub") ? true : false;
+}
+
+<!-- NavBar -->
+@Html.Partial(this.ContentRelativeToView("NavBar.cshtml"), (List<Clubber.Backend.Models.ClubZone>)ViewBag.Club.ClubZones)
+<!-- /NavBar -->
+
+<!-- Cards Body -->
+<div class="container mainContainer">
+    <div class="card-columns category">
+        <!-- BLOG POST -->
+        @if(MainCat && !subCat)
+        {
+            foreach (var clubZone in categories.OrderBy(cz => cz.Order).ThenBy(cz => cz.Name))
+            {
+                if(@clubZone.Name.Contains("_SeriesSub"))
+                {
+                    <!-- Movie Card -->
+                    <div class="card" onclick="location.href='@Url.Action("Category", "MemberZone", new { id = clubZone.ID })';">
+                        <!--Card image-->
+                        <div class="view overlay hm-white-slight card-img-text">
+                            <img class="img-fluid" src="@Url.Content(string.Format("{0}/categoryIndex.jpg", clubZone.RootFolder))" alt="@clubZone.Name">
+                            <div class="card-img-text-container">
+                                <h4 class="card-title2"><strong class="i18n" id="@clubZone.Name"></strong></h4>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-description i18n" id="@clubZone.Name-desc"></p>
+                        </div>
+                    </div>
+                    <!-- /Movie Card -->
+                }
+            }
+        }else{ 
+            foreach (var clubItem in Model.ClubItems.Where(cz => cz.IsEnabled).OrderBy(cz => cz.Name))
+            {
+                var sinlgeVideo = new List<string>();
+                var isVideo = false;
+                foreach (var vid in videos)
+                {
+                    if (vid.Contains(clubItem.Name))
+                    {
+                        sinlgeVideo.Add(@vid);
+                        isVideo = true;
+                    }
+                }
+                if (clubItem.Name.Contains("1080") || clubItem.Name.Contains("720")||clubItem.Name.Contains("480")){}
+                else{
+
+                if(totalItems>=1 && totalItems<=itemsPerPage)
+                {
+                    @*'*@
+                    var idPage="page" + pageCounterGlobal; 
+                            <!-- Movie Card -->
+                            <div class="card itemcategory" id="@idPage" data-animated="fadeInUp">
+                                <!--Card image-->
+                                <div class="view overlay hm-white-slight card-img-text">
+                                    <div id="vidItem-@clubItem.Name">
+                                    </div>
+                                    <img class="img-fluid imgItem @clubItem.Name" src="@Url.Content(clubItem.PreviewUrl)" alt="@clubItem.Name">
+                                    <div class="card-img-text-container imgItem @clubItem.Name">
+                                        <h4 class="card-title"><strong class="i18n" id="@clubItem.Name"></strong></h4>
+                                        <div class="VideoCategoPlayBtn">
+                                            <i class="fa fa-play-circle" OnClick="videoP('@clubItem.Name', '@(isVideo ? "playVid" : "playSong")', '@string.Join("^-^", sinlgeVideo)', '@Url.Content(clubItem.PreviewUrl)', '@clubItem.ClubZone.Name')"></i>
+                                        </div>
+                                        <div id="rateYo-@clubItem.ID" class="card-rating"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer likeRate" likeRate="@clubItem.ID">
+                                    <div class="like-content">
+                                        <button onclick="itemLike('@clubItem.ID')" class="btn btn-custom">
+                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like
+                                        </button>
+                                        <span id="likeN-@clubItem.ID" class="likeText">0 likes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Movie Card -->
+
+                    pageCounter = pageCounterGlobal;
+                }
+
+                if(totalItems==itemsPerPage){
+                    totalItems=0;
+                    pageCounterGlobal++;
+                }
+                totalItems ++;
+                }
+            }
+        }
+    </div>
+    <!-- PAGINATION -->
+    <div id="page-selection"></div>
+    <!-- //PAGINATION -->
+</div>
+<!-- /Cards Body -->
+
+<!-- Footer -->
+@*@Html.Partial(this.ContentRelativeToView("footer.cshtml"), (List<Clubber.Backend.Models.ClubZone>)ViewBag.Club.ClubZones)*@
+<!-- /Footer -->
+
+<!-- JS Paginador -->
+<script type="text/javascript">
+    
+//Save page with cookies. 
+
+    var localPage = new Number(); 
+    localPage=1;
+
+        //FUnction getCookie in cookie.js
+        var ejemplo = getCookie("@catego");
+
+        if (document.cookie.indexOf('@catego=') == -1 || ejemplo == null || ejemplo ==''  ) {
+
+        }else{            
+                localPage=ejemplo;
+        }
+
+
+        @foreach (var clubZone in categories.OrderBy(cz => cz.Order).ThenBy(cz => cz.Name))
+            {
+                if(clubZone.Name != Model.Name ){
+                    <text> cookiePager('@clubZone.Name','1');  </text>    
+                }
+                
+            }
+
+    $(".category .itemcategory").hide();      
+    $("div#page"+localPage).fadeIn('slow');
+    $( document ).ready(function() {
+    $('#page-selection').bootpag({
+        total: @pageCounter,
+        page: localPage,
+        maxVisible: 5,
+        next:'<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+        prev:'<i class="fa fa-arrow-left" aria-hidden="true"></i>'
+    }).on("page", function(event, num){
+
+            $("div.itemcategory").hide();
+            $("div#page"+num).fadeIn('slow');
+            cookiePager('@catego', num);
+        });
+
+    $( ".pagination li a" ).on( "click", function() {
+        if(localPage ==1 ){
+            $(".prev.disabled > a").attr("href","@home");
+        }
+    });
+});
+</script>
+<!-- /JS Paginador -->

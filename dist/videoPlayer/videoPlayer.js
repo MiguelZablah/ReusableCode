@@ -109,7 +109,7 @@ var videoInitPlug = function videoInitPlug() {
 videoInitPlug();
 
 
-function vidCatego(id, validation, vidNames, poster, catego) {
+function videoP(id, validation, vidNames, poster, catego) {
     var clubName = poster.split("sites/").pop().split("/")[0];
     if (validation == "playVid") {
         if ($("#video_res").length) {
