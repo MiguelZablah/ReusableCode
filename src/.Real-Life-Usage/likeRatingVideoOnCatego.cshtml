@@ -181,11 +181,11 @@
             cookiePager('@catego', num);
         });
 
-    $( ".pagination li a" ).on( "click", function() {
-        if(localPage ==1 ){
-            $(".prev.disabled > a").attr("href","@home");
-        }
+        $( ".pagination li a" ).on( "click", function() {
+            if(localPage ==1 ){
+                $(".prev.disabled > a").attr("href","@home");
+            }
+        });
     });
-});
 </script>
 <!-- /JS Paginador -->
