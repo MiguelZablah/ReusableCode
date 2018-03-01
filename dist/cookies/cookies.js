@@ -2,7 +2,6 @@
 
 var cookie = function (document) {
 
-    // Create Cookie
     var createsCookie = function createsCookie(name, value, days) {
         var expires = "";
         if (days) {
@@ -17,7 +16,6 @@ var cookie = function (document) {
         return null;
     };
 
-    // Reads Cookie
     var readsCookie = function readsCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
@@ -26,7 +24,6 @@ var cookie = function (document) {
         return null;
     };
 
-    // Delete Cookie
     var deleteCookie = function deleteCookie(name) {
         createsCookie(name, "", -1);
         if (readsCookie.length > 0) return "Cookie Deleted";
