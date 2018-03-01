@@ -1,5 +1,6 @@
 var localStorage = (function(window){
 
+    // Creates and checks local storage exist
     var createLocalStorage = function(key, value) {
         window.localStorage.setItem(key, value);
 
@@ -9,6 +10,7 @@ var localStorage = (function(window){
         return null;
     };
 
+    // Read and returns value of local storage if exist
     var readLocalStorage = function(key) {
         var newCookie = window.localStorage.getItem(key);
         if(newCookie.value != null)
@@ -17,6 +19,7 @@ var localStorage = (function(window){
         return null;
     };
 
+    // Deletes local storage and return string if success full
     var deleteLocalStorage = function(key) {
         window.localStorage.removeItem(key);
 
