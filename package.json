@@ -1,0 +1,33 @@
+{
+  "name": "reusable-code",
+  "version": "1.0.0",
+  "description": "Some code that I want to reuse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelZablah/ReusableCode.git"
+  },
+  "keywords": [
+    "test",
+    "reusable"
+  ],
+  "author": "Zablah <miguel12979@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MiguelZablah/ReusableCode/issues"
+  },
+  "homepage": "https://github.com/MiguelZablah/ReusableCode#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^2.1.0"
+  }
+}
