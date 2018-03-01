@@ -1,0 +1,104 @@
+@using Clubber.Mvc.Utils
+@using WURFL
+@model List<Clubber.Backend.Models.ClubZone>
+
+@{
+	var categories = Model.Where(cz => cz.IsEnabled).OrderBy(cz => cz.Order).ThenBy(cz => cz.Name);
+
+	var device = WURFLManagerBuilder.Instance.GetDeviceForRequest(Request.UserAgent, MatchMode.Performance);
+	if (bool.Parse(device.GetVirtualCapability("is_ios")))
+	{
+		categories = categories.Where(cz => cz.Description != "APK").OrderBy(cz => cz.Order).ThenBy(cz => cz.Name);
+	}
+	var arrayCategories = categories.ToArray();
+	var itemSuggestions = new List<Clubber.Backend.Models.ClubItem>();
+
+	for (var i = 0; i < arrayCategories.Count(); i++)
+	{
+		foreach (var item in arrayCategories[i].ClubItems.Where(ci => ci.IsEnabled).OrderBy(ci => ci.Name)) 
+		{ 
+			if(item.Name.Contains("_1080")||item.Name.Contains("_720")){
+			}else{
+				itemSuggestions.Add(item);
+			}
+		}				
+	}
+}
+
+<style>
+.autocomplete-suggestions { 
+    border: 1px solid #e0e0e0;
+    background: #fbfbfb;
+    overflow: auto;
+    color: #252525;
+    box-shadow: 4px 5px 8px #696969cc;
+}
+.autocomplete-suggestion { 
+    padding: 2px 5px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+.autocomplete-selected { 
+    background: #F0F0F0; 
+}
+.autocomplete-suggestions strong { 
+    font-weight: normal; 
+    color: #f84949; 
+}
+.autocomplete-group { 
+    padding: 2px 5px; 
+}
+.autocomplete-group strong { 
+    display: block; 
+    border-bottom: 1px solid #000; 
+}
+</style>
+
+<nav id="menu" class="navbar navbar-expand-md navbar-dark bg-custom fixed-top">
+	<a class="navbar-brand logoContainer" href="@Url.Action("Index", "Memberzone")">
+		<img class="logoImg" src="@this.ContentRelativeToView("img/logo.gif")" alt="Logo">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			<li class="nav-item active">
+				<a href="@Url.Action("Index", "Memberzone")" class="nav-link i18n" id="Home">Home</a>
+			</li>
+			@foreach (var clubZone in categories)
+			{
+				if(@clubZone.Name.Contains("_SeriesSub")){
+				}else{
+					<li class="nav-item active">
+						<a class="nav-link i18n" href="@Url.Action("Category", "MemberZone", new { id = clubZone.ID })" id="@clubZone.Name">
+							@clubZone.Name
+						</a>
+					</li>
+				}
+			}
+		</ul>
+		<form class="form-inline my-2 my-lg-0">
+		<input class="form-control mr-sm-2" id="autocomplete" type="text" placeholder="Search...">
+		@*<button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Buscar">Search</button>*@
+		</form>
+	</div>
+</nav>
+
+<!-- Search Box Fieler -->
+<ul style="display: none;" class="nameList">
+	@foreach (var clubZone in categories.OrderBy(cz => cz.Name)){
+		if(@clubZone.Name.Contains("Banner")){
+		}else{
+			<li url="@Url.Action("Category", "MemberZone", new { id = clubZone.ID })" id="@clubZone.Name" class="i18n"></li>
+		}
+	}
+	@foreach (var item in itemSuggestions.OrderBy(cz => cz.Name)){
+		if(@item.Name.Contains("Banner")){
+		}else{
+			<li url="@Url.Action("DownloadConfirm", "MemberZone", new { id = item.ID })" id="@item.Name" class="i18n"></li>
+		}
+	}
+</ul>
+<!-- /Search Box Fieler -->

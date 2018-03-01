@@ -80,6 +80,18 @@ gulp.task('videoPlayerPlugInsBuildCSS', function() {
         .pipe(gulp.dest('dist/videoPlayerPlugIns/'));
 });
 
+// Search Bar with plugIn
+gulp.task('searchBarBuildJS', function() {
+    gulp.src('src/SearchBar/*.js')
+        .pipe(concat('searchBar.js'))
+        .pipe(stripJsComments())
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(minify())
+        .pipe(gulp.dest('dist/searchBar/'));
+});
+
 gulp.task('default', [
     'likeAndRatingBuildJS', 
     'likeAndRatingBuildCSS', 
@@ -87,5 +99,6 @@ gulp.task('default', [
     'localStorageBuild',
     'videoPlayerBuildJS',
     'videoPlayerPlugInsBuildJS',
-    'videoPlayerPlugInsBuildCSS'
+    'videoPlayerPlugInsBuildCSS',
+    'searchBarBuildJS'
 ]);

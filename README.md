@@ -101,7 +101,7 @@ Install
 <script src="videoPlayers-min.js"></script>
 ```
 
-Usage using Razor for display an array of items Example
+Example using Razor
 
 Razor
 ```javascript
@@ -163,6 +163,61 @@ Html
         </i>
     </div>
 </div>
+```
+
+## Search Bar
+
+Install
+```html
+<!-- Add cookies JS -->
+<script src="searchBar-min.js"></script>
+```
+
+Recommended CSS
+```css
+.autocomplete-suggestions { 
+    border: 1px solid #e0e0e0;
+    background: #fbfbfb;
+    overflow: auto;
+    color: #252525;
+    box-shadow: 4px 5px 8px #696969cc;
+}
+.autocomplete-suggestion { 
+    padding: 2px 5px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+.autocomplete-selected { 
+    background: #F0F0F0; 
+}
+.autocomplete-suggestions strong { 
+    font-weight: normal; 
+    color: #f84949; 
+}
+.autocomplete-group { 
+    padding: 2px 5px; 
+}
+.autocomplete-group strong { 
+    display: block; 
+    border-bottom: 1px solid #000; 
+}
+```
+
+Example using Razor
+```html
+<!-- Search Box Fill -->
+<ul style="display: none;" class="searchItemList">
+	@foreach (var item in items.OrderBy(cz => cz.Name)){
+        <li url="item-url">item-name</li>
+	}
+</ul>
+<!-- /Search Box Fill -->
+```
+
+Search Input
+```html
+<input id="autocomplete" type="text" placeholder="Search...">
+<button class="searchBtn" type="submit" value="Search">Search</button>
 ```
 
 ## Cookies
