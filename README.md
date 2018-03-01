@@ -11,8 +11,7 @@ All of this code uses JQuery
 
 ## Likes and Rating
 
-JS Requierd
-Cookies JS and Firebase
+Requierd CSS and JS
 ```html
 <!-- My cookies and Local Storage controller -->
 <script src="cookies-min.js"></script>
@@ -22,7 +21,7 @@ Cookies JS and Firebase
 <script src="https://use.fontawesome.com/ceaa390e68.js"></script>
 ```
 
-Add JS and CSS of Code
+Install
 ```html
 <!-- Add cookies JS -->
 <script src="likesAndRating-min.js"></script>
@@ -98,7 +97,8 @@ Function available
 // Creates Cookie
 /*
 * If Cookie was not created return null
-* If it was creted return a text with wath it was created
+* If it was creted return a string with what it was created
+* durationInDays is optional, by default its 10 days
 */
 cookie.create(cookieName, cookieValue, durationInDays);
 
@@ -112,7 +112,7 @@ cookie.read(cookieName);
 // Delete Cookie
 /*
 * If Cookie was not delete return null
-* If it was delete return a text with wath it was delete
+* If it was delete return a confirmation string
 */
 cookie.delete(cookieName);
 ```
@@ -130,7 +130,7 @@ Function available
 // Creates Local Storage
 /*
 * If Local Storage was not created return null
-* If it was creted return a text with wath it was created
+* If it was creted return a string with what it was created
 */
 localStorage.create(localStorageKey, localStorageValue);
 
@@ -144,7 +144,7 @@ localStorage.read(localStorageKey);
 // Delete Local Storage
 /*
 * If Local Storage was not delete return null
-* If it was delete return a text with wath it was delete
+* If it was delete return a confirmation string
 */
 localStorage.delete(localStorageKey);
 
