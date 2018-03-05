@@ -8,6 +8,13 @@ var cookie = (function(document){
             date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = "; expires=" + date.toUTCString();
         }
+
+        if (name == null || name == undefined)
+            return `Cookie key not set: ${name}`;
+
+        if (value == null || value == undefined)
+            return `Cookie Value not set: ${name}`;
+
         document.cookie = name + "=" + value + expires + "; path=/";
 
         if(readsCookie.length > 0)
@@ -18,6 +25,9 @@ var cookie = (function(document){
 
     // Reads Cookie
     var readsCookie = function(name) {
+        if (name == null || name == undefined)
+            return `Cookie key not set: ${name}`;
+
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
         if (parts.length == 2)
@@ -28,6 +38,9 @@ var cookie = (function(document){
 
     // Delete Cookie
     var deleteCookie = function(name) {
+        if (name == null || name == undefined)
+            return `Cookie key not set: ${name}`;
+        
         createsCookie(name,"",-1);
         if(readsCookie.length > 0)
             return "Cookie Deleted";

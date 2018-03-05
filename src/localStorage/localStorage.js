@@ -2,6 +2,12 @@ var localStorage = (function(window){
 
     // Creates and checks local storage exist
     var createLocalStorage = function(key, value) {
+        if (key == null || key == undefined)
+            return `LocalStorage key not set: ${key}`;
+
+        if (value == null || value == undefined)
+            return `LocalStorage Value not set: ${name}`;
+
         window.localStorage.setItem(key, value);
 
         if (readLocalStorage(key) != null)
@@ -12,7 +18,11 @@ var localStorage = (function(window){
 
     // Read and returns value of local storage if exist
     var readLocalStorage = function(key) {
+        if (key == null || key == undefined)
+            return `LocalStorage key not set: ${key}`;
+
         var newCookie = window.localStorage.getItem(key);
+
         if(newCookie.value != null)
             return newCookie;
 
@@ -21,6 +31,9 @@ var localStorage = (function(window){
 
     // Deletes local storage and return string if success full
     var deleteLocalStorage = function(key) {
+        if (key == null || key == undefined)
+            return `LocalStorage key not set: ${key}`;
+        
         window.localStorage.removeItem(key);
 
         if(readLocalStorage(key))
