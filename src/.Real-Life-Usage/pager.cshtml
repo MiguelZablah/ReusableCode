@@ -1,0 +1,243 @@
+@using Clubber.Mvc.Utils
+@model Clubber.Backend.Models.ClubZone
+@using WURFL
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = this.ContentRelativeToView("_LayoutSite_2.cshtml");
+}
+
+@{
+	// Pager Variables
+	var pageCounter=0;
+    var totalItems= 1;
+    var pageCounterGlobal=1;
+    var catego= Model.Name;
+    var itemsPerPage=2;
+}
+
+@{
+	var device = WURFLManagerBuilder.Instance.GetDeviceForRequest(Request.UserAgent, MatchMode.Performance);
+	var categories = Model.Club.ClubZones.Where(cz => cz.IsEnabled);
+	if (bool.Parse(device.GetVirtualCapability("is_ios")))
+	{
+		categories = categories.Where(cz => cz.Description != "APK");
+	}
+}
+@{
+	var videos = new List<string>();
+}
+@foreach (var video in Model.ClubItems)
+{
+	if (video.FileUrl.Contains(".mp4"))
+	{
+		videos.Add(@video.Name);
+	}
+}
+
+<!-- PRELOADER -->
+<img id="preloader" src="@this.ContentRelativeToView("images/preloader.gif")" alt="" />
+<!-- //PRELOADER -->
+<div class="preloader_hide">
+
+	<!-- PAGE -->
+	<div id="page" class="single_page">
+			
+        <!-- Navbar -->
+        @Html.Partial(this.ContentRelativeToView("NavBar.cshtml"), (List<Clubber.Backend.Models.ClubZone>)ViewBag.Club.ClubZones)
+        <!-- //Navbar -->
+		
+		
+		<!-- BREADCRUMBS -->
+		<section class="breadcrumbs_block clearfix parallax">
+			<div class="container center">
+				<h2><b class="i18n" id="categoryTitle">Title</b></h2>
+				<p class="i18n" id="categoriesDesc">Description...</p>
+			</div>
+		</section><!-- //BREADCRUMBS -->
+		
+		
+		<!-- BLOG -->
+		<section id="blog">
+			
+			<!-- CONTAINER -->
+			<div class="container">
+				
+				<!-- ROW -->
+				<div class="row">
+				
+					<!-- BLOG BLOCK -->
+					<div class="blog_block col-lg-9 col-md-9 padbot50 pager-container">
+						
+						<!-- BLOG POST -->
+						@foreach (var clubItem in Model.ClubItems.Where(cz => cz.IsEnabled).OrderByDescending(cz => cz.CreatedOn))
+                        {
+							var sinlgeVideo = new List<string>();
+							var hasVideo = false;
+							foreach (var vid in videos)
+							{
+								if (vid.Contains(clubItem.Name))
+								{
+									sinlgeVideo.Add(@vid);
+									hasVideo = true;
+								}
+							}
+                            if (clubItem.Name.Contains("1080") || clubItem.Name.Contains("720")||clubItem.Name.Contains("480")){
+							}
+                        
+                            else {
+
+                            if(totalItems>=1 && totalItems<=itemsPerPage){
+
+                                var idPage="page" + pageCounterGlobal; 
+									
+                                     <div class="blog_post margbot50 clearfix pager-item" id="@idPage" data-animated="fadeInUp">
+										<div id="vidItem-@clubItem.Name">
+										</div>
+										<div class="blog_post_img imgItem @clubItem.Name" onClick="vidCatego('@clubItem.Name', '@(hasVideo ? "playVid" : "noVid")', '@string.Join("^-^", sinlgeVideo)', '@Url.Content(clubItem.PreviewUrl)')">
+											<img src="@Url.Content(clubItem.PreviewUrl)" alt="@clubItem.Name" />
+											@*<a class="zoom" href="@Url.Action("DownloadConfirm", "MemberZone", new { id = clubItem.ID })" ></a>*@
+										</div>
+										<div class="blog_post_descr likeRate" likeRate="@clubItem.ID">
+											<a class="blog_post_title i18n" id="@clubItem.Name" href="@Url.Action("DownloadConfirm", "MemberZone", new { id = clubItem.ID })" >
+												Item Name...
+											</a>
+											<hr>
+										</div>
+                                    </div>
+
+
+
+                                pageCounter = pageCounterGlobal;
+
+                            }
+
+                            if(totalItems==itemsPerPage){
+                                totalItems=0;
+                                pageCounterGlobal++;
+                            }
+                            totalItems ++;
+                        }
+                    }
+						
+						<!-- PAGINATION -->
+                        <ul id="paginator pagination clearfix">
+                            <div id="pager-pagination"></div>
+                        </ul>
+						<!-- //PAGINATION -->
+
+					</p><!-- //BLOG BLOCK -->
+					
+					
+					<!-- SIDEBAR -->
+					<div class="sidebar col-lg-3 col-md-3 padbot50">
+
+                        <!-- META WIDGET -->
+						<div class="sidepanel widget_meta">
+							<ul>
+								<li><a href="javascript:void(0);" >Advertising</a></li>
+								<li><a href="javascript:void(0);" >Fashion & Trends</a></li>
+								<li><a href="javascript:void(0);" >Media Projects</a></li>
+								<li><a href="javascript:void(0);" >Small Business</a></li>
+								<li><a href="javascript:void(0);" >Creative</a></li>
+							</ul>
+						</div>
+                        <!-- //META WIDGET -->
+						
+						<!-- Suggestions -->
+						<div class="sidepanel widget_popular_posts">
+							<h3><b class="i18n" id="titleSuggestions">Sugestions...</b></h3>
+
+							@{
+								Random rnd = new Random();
+								var arrayItems = categories.ToArray();
+								var itemSuggestions = new List<Clubber.Backend.Models.ClubItem>();
+								for (var i = 0; i < 3; i++)
+								{
+									var cat = rnd.Next(0, arrayItems.Count());
+									var max = arrayItems[cat].ClubItems.Where(ci => ci.IsEnabled).Count();
+									var temp = arrayItems[cat].ClubItems.Where(ci => ci.IsEnabled).OrderBy(o => rnd.Next(0, max)).FirstOrDefault();
+
+									if((temp.Name.Contains("1080"))||(temp.Name.Contains("720"))||(temp.Name.Contains("480"))){
+										
+										i--;
+										
+									}else{
+
+										if (!itemSuggestions.Contains(temp))
+										{
+											itemSuggestions.Add(temp);
+										}else{ 
+											i--; 
+										}
+									}
+								}
+
+								foreach (var item in itemSuggestions)
+								{
+								<!-- Item Post -->
+									<div class="recent_posts_widget clearfix">
+										<div class="post_item_img_widget">
+											<a href="@Url.Action("DownloadConfirm", "MemberZone", new { id = item.ID })">
+												<img src="@Url.Content(item.PreviewUrl)" alt="@item.Name"/>
+											</a>
+										</div>
+										<div class="post_item_content_widget">
+											<a class="title i18n" id="@item.Name" href="@Url.Action("DownloadConfirm", "MemberZone", new { id = item.ID })">
+												Title Item..
+											</a>
+											<!-- <ul class="post_item_inf_widget">
+												<li>JANUARY 30  |  21:30</li>
+											</ul> -->
+										</div>
+									</div>
+								<!-- //Item Post --> 
+								}
+
+							}
+						</div>
+                        <!-- //Suggestions -->
+
+                        <hr>
+
+                        <!-- POPULAR TAGS WIDGET -->
+						<div class="sidepanel widget_tags">
+							<h3><b>Popular</b> Tags</h3>
+							<ul>
+								<li><a href="javascript:void(0);" >Fashion</a></li>
+								<li><a href="javascript:void(0);" >Shop</a></li>
+								<li><a href="javascript:void(0);" >Color</a></li>
+								<li><a href="javascript:void(0);" >Creative Agency</a></li>
+								<li><a href="javascript:void(0);" >Theme</a></li>
+								<li><a href="javascript:void(0);" >Dress</a></li>
+								<li><a href="javascript:void(0);" >Wordpress</a></li>
+							</ul>
+						</div>
+                        <!-- POPULAR TAGS WIDGET -->
+						
+						<hr>
+						
+						<!-- TEXT WIDGET -->
+						<div class="sidepanel widget_text">
+							<h3><b>About</b> Blog</h3>
+							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>
+						</div>
+                        <!-- //TEXT WIDGET -->
+						
+					</div><!-- //SIDEBAR -->
+				</div><!-- //ROW -->
+			</div><!-- //CONTAINER -->
+		</section><!-- //BLOG -->
+	</div><!-- //PAGE -->
+	
+	<!-- FOOTER -->
+    @Html.Partial(this.ContentRelativeToView("footer.cshtml"), (List<Clubber.Backend.Models.ClubZone>)ViewBag.Club.ClubZones)
+	<!-- //FOOTER -->
+
+</div>
+
+
+<script>
+	pager.init('@catego', @pageCounter, true);
+</script>
+<script type="text/javascript" src="@this.ContentRelativeToView("./js/video-category.js")"></script>
