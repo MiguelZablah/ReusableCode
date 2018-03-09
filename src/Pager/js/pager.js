@@ -96,11 +96,6 @@ pager.restarOnMz();
 *}
 */
 
-/* Add variables on category
-* var catName = '@catego';
-* var totalPages = @pageCounter;
-*/
-
 /* Example use
 *  pager.init('@catego', @pageCounter, true);
 */

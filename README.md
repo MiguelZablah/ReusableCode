@@ -220,6 +220,125 @@ Search Input
 <button class="searchBtn" type="submit" value="Search">Search</button>
 ```
 
+## Pager with bootPag
+
+Installation using bootstrap 3
+```html
+<!-- Add bootpag CSS and JS -->
+<link rel="stylesheet" type="text/css" href="bootpag.css" />
+<script src="bootpag-min.js"></script>
+<!-- Add cookies JS -->
+<script src="cookies-min.js"></script>
+<!-- Add Pager -->
+<script src="pager-min.js"></script>
+```
+
+Installation using bootstrap 4
+```html
+<!-- Add bootpag CSS and JS -->
+<link rel="stylesheet" type="text/css" href="bootpagB4.css" />
+<script src="bootpagB4-min.js"></script>
+<!-- Add cookies JS -->
+<script src="cookies-min.js"></script>
+<!-- Add Pager -->
+<script src="pager-min.js"></script>
+```
+
+Simple Html Example Usage
+```html
+<!-- Pager Container -->
+<div class="pager-container">
+    <div class="pager-item" id="1">
+        <!-- stuf and things... -->
+    </div>
+    <div class="pager-item" id="2">
+        <!-- stuf and things... -->
+    </div>
+</div>
+<!-- /Pager Container -->
+<!-- PAGINATION -->
+<ul id="paginator pagination clearfix">
+    <div id="pager-pagination"></div>
+</ul>
+<!-- /PAGINATION -->
+```
+
+Simple JS Example Usage
+```javascript
+pager.init('categoryName', 2);
+```
+
+Function available
+```javascript
+// Complex Pager init usage
+/*
+* Return a string that ca be use for debuging
+* 1. First argument should be a string with the name of the pager to save in cookie the page you are.
+* 2. Second argument should be a number with the number of pages it will have
+* 3. Third argument is an optianl value and should be a boolean for deleting when in index(@razer Only), by default is false
+* 4. Fourth argument is an optianl value and should be a string with a a custom arrow for next, by default is "»"
+* 5. Fifth argument is an optianl value and should be a string with a a custom arrow for next, by default is "«"
+*/
+pager.init('categoryName', 
+            5, 
+            true,
+            '<i class="fa fa-arrow-right" aria-hidden="true"></i>', 
+            '<i class="fa fa-arrow-left" aria-hidden="true"></i>');
+
+// Pager restar
+/*
+* Return a string that ca be use for debuging
+* Deletes storage of pager in cookies
+*/
+pager.restart();
+```
+
+Real Example using razer foreach
+```html
+<!-- Pager Razer Variables -->
+@{
+    var pageCounter=0;
+    var totalItems= 1;
+    var pageCounterGlobal=1;
+    var catego= Model.Name;
+    var itemsPerPage=10;
+}
+<!-- /Pager Razer Variables -->
+<!-- Pager Container -->
+<div class="pager-container">
+    @foreach (var item in itemObj)
+    {
+        
+        if(totalItems>=1 && totalItems<=itemsPerPage){
+            var idPage="page" + pageCounterGlobal; 
+                    <div class="pager-item" id="@idPage" data-animated="fadeInUp">
+                        @item.Name
+                    </div>
+            pageCounter = pageCounterGlobal;
+        }
+        if(totalItems==itemsPerPage){
+            totalItems=0;
+            pageCounterGlobal++;
+        }
+        totalItems ++;
+    }
+</div>
+<!-- /Pager Container -->
+
+<!-- PAGINATION -->
+<ul id="paginator pagination clearfix">
+    <div id="pager-pagination"></div>
+</ul>
+<!-- /PAGINATION -->
+
+<!-- JS for pager -->
+<script>
+    // Send categoryName(as string), pageTotal(in number), and true(for delete on indez)
+    pager.init('@catego', @pageCounter, true);
+</script>
+<!-- /JS for pager -->
+```
+
 ## Cookies
 
 Install
@@ -232,6 +351,7 @@ Function available
 ```javascript
 // Creates Cookie
 /*
+* If CookieName or CokieValue null or undifine will not create cookie and will return string with error
 * If Cookie was not created return null
 * If it was creted return a string with what it was created
 * durationInDays is optional, by default its 10 days
@@ -265,6 +385,7 @@ Function available
 ```javascript
 // Creates Local Storage
 /*
+* If localStorageKey or localStorageValue null or undifine will not create Local Storage and will return string with error
 * If Local Storage was not created return null
 * If it was creted return a string with what it was created
 */
