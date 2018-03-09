@@ -3,6 +3,10 @@
 var localStorage = function (window) {
 
     var createLocalStorage = function createLocalStorage(key, value) {
+        if (key == null || key == undefined) return "LocalStorage key not set: " + key;
+
+        if (value == null || value == undefined) return "LocalStorage Value not set: " + name;
+
         window.localStorage.setItem(key, value);
 
         if (readLocalStorage(key) != null) return "Cookie created";
@@ -11,13 +15,18 @@ var localStorage = function (window) {
     };
 
     var readLocalStorage = function readLocalStorage(key) {
+        if (key == null || key == undefined) return "LocalStorage key not set: " + key;
+
         var newCookie = window.localStorage.getItem(key);
+
         if (newCookie.value != null) return newCookie;
 
         return null;
     };
 
     var deleteLocalStorage = function deleteLocalStorage(key) {
+        if (key == null || key == undefined) return "LocalStorage key not set: " + key;
+
         window.localStorage.removeItem(key);
 
         if (readLocalStorage(key)) return "Cookie deleted";

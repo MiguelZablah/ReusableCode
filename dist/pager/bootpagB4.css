@@ -1,0 +1,26 @@
+div#page-selection {
+    text-align: center;
+}
+ul.pagination.bootpag li a {
+
+    font-size: 12px;
+    font-weight: bold;
+}
+.pagination > li > a, .pagination > li > span {
+    color: #3d5b98;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #3d5b98;
+    border-color: #3d5b98;
+}
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled{
+	color: #3d5b98;
+
+}
+.page-item.active .page-link{
+    background-color: #3d5b98;
+    border-color: #3d5b98;
+}

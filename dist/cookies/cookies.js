@@ -9,6 +9,11 @@ var cookie = function (document) {
             date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
             expires = "; expires=" + date.toUTCString();
         }
+
+        if (name == null || name == undefined) return "Cookie key not set: " + name;
+
+        if (value == null || value == undefined) return "Cookie Value not set: " + name;
+
         document.cookie = name + "=" + value + expires + "; path=/";
 
         if (readsCookie.length > 0) return "cookie create => Name: " + name + ", Value: " + value + ", Expires in: " + days + " days";
@@ -17,6 +22,8 @@ var cookie = function (document) {
     };
 
     var readsCookie = function readsCookie(name) {
+        if (name == null || name == undefined) return "Cookie key not set: " + name;
+
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
         if (parts.length == 2) return parts.pop().split(";").shift();
@@ -25,6 +32,8 @@ var cookie = function (document) {
     };
 
     var deleteCookie = function deleteCookie(name) {
+        if (name == null || name == undefined) return "Cookie key not set: " + name;
+
         createsCookie(name, "", -1);
         if (readsCookie.length > 0) return "Cookie Deleted";
 

@@ -92,6 +92,49 @@ gulp.task('searchBarBuildJS', function() {
         .pipe(gulp.dest('dist/searchBar/'));
 });
 
+// bootPage bootstrap3
+gulp.task('bootpagBuildJS', function() {
+    gulp.src('src/pager/js/bootpag.js')
+        .pipe(concat('bootpag.js'))
+        .pipe(stripJsComments())
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(minify())
+        .pipe(gulp.dest('dist/pager/'));
+});
+
+// bootPage bootstrap4
+gulp.task('bootpagB4BuildJS', function() {
+    gulp.src('src/pager/js/bootpagB4.js')
+        .pipe(concat('bootpagB4.js'))
+        .pipe(stripJsComments())
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(minify())
+        .pipe(gulp.dest('dist/pager/'));
+});
+
+// Build Pager Css no minify
+gulp.task('pagerBuildCss', function() {
+    gulp.src('src/pager/css/*.css')
+        .pipe(stripCssComments())
+        .pipe(gulp.dest('dist/pager/'));
+});
+
+// Pager for bootpag and bootpagB4
+gulp.task('pagerBuildJS', function() {
+    gulp.src('src/pager/js/pager.js')
+        .pipe(concat('pager.js'))
+        .pipe(stripJsComments())
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(minify())
+        .pipe(gulp.dest('dist/pager/'));
+});
+
 gulp.task('default', [
     'likeAndRatingBuildJS', 
     'likeAndRatingBuildCSS', 
@@ -100,5 +143,9 @@ gulp.task('default', [
     'videoPlayerBuildJS',
     'videoPlayerPlugInsBuildJS',
     'videoPlayerPlugInsBuildCSS',
-    'searchBarBuildJS'
+    'searchBarBuildJS',
+    'bootpagBuildJS',
+    'bootpagB4BuildJS',
+    'pagerBuildCss',
+    'pagerBuildJS'
 ]);
