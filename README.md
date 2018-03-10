@@ -13,13 +13,13 @@ All of this code uses JQuery
 ```
 
 ## Table of Content
-**1. [Likes and Rating](#Likes-and-Rating)**<br>
-**2. [Video Player](#Video-Player)**<br>
-**3. [Search Bar](#Search-Bar)**<br>
-**4. [Pager with bootPag](#Pager-with-bootPag)**<br>
-**5. [Cookies](#Cookies)**<br>
-**6. [Local Storage](#Local-Storage)**<br>
-**7. [License](#License)**<br>
+**1. [Likes and Rating](#likes-and-rating)**<br>
+**2. [Video Player](#video-player)**<br>
+**3. [Search Bar](#search-bar)**<br>
+**4. [Pager with bootPag](#pager-with-bootPag)**<br>
+**5. [Cookies](#cookies)**<br>
+**6. [Local Storage](#local-storage)**<br>
+**7. [License](#license)**<br>
 
 ## Likes and Rating
 
