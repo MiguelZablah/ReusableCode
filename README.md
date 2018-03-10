@@ -1,5 +1,8 @@
 ## Reusable Code
 
+This Proyect is for documentacion and easy acces to some stuff that I use personaly but you can use it if you wish maybe it helps you some one in some place...
+
+### Requierments
 All of this code uses JQuery
 ```html
 <!-- I use JQuery 3.3.1 CDN -->
@@ -8,6 +11,15 @@ All of this code uses JQuery
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 ```
+
+## Table of Content
+**1. [Likes and Rating](#Likes-and-Rating)**<br>
+**2. [Video Player](#Video-Player)**<br>
+**3. [Search Bar](#Search-Bar)**<br>
+**4. [Pager with bootPag](#Pager-with-bootPag)**<br>
+**5. [Cookies](#Cookies)**<br>
+**6. [Local Storage](#Local-Storage)**<br>
+**7. [License](#License)**<br>
 
 ## Likes and Rating
 
@@ -84,7 +96,9 @@ $(document).ready(function() {
 });
 ```
 
-## Video Player (Supports MP4 and MP3)
+## Video Player
+
+Supports MP4 and MP3**<br>
 
 Requierd Css
 ```html
@@ -308,7 +322,6 @@ Real Example using razer foreach
 <div class="pager-container">
     @foreach (var item in itemObj)
     {
-        
         if(totalItems>=1 && totalItems<=itemsPerPage){
             var idPage="page" + pageCounterGlobal; 
                     <div class="pager-item" id="@idPage" data-animated="fadeInUp">
@@ -408,3 +421,6 @@ localStorage.delete(localStorageKey);
 // Deletes All Local Storage
 localStorage.deleteAll();
 ```
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
