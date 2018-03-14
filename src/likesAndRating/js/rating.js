@@ -8,8 +8,9 @@ function rateGame(id, rateYo) {
 }
 // Guarda el rating
 function saveRating(id, rateYo) {
-    var locUser = cookie.read("t");
-    if(locUser){
+    var locUse = cookie.read("t");
+    if(locUse){
+        var locUser = locUse.replace(/\./g, "");
         locUser.replace(/\./g, "");
         db.ref(`${RTbase}/${id}/rating`).once("value", snapshot => {
             var itemRating = snapshot.val();

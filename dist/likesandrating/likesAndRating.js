@@ -7,8 +7,9 @@ require("rateYo");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function itemLike(id) {
-      var locUser = cookie.read("t");
-      if (locUser) {
+      var locUse = cookie.read("t");
+      if (locUse) {
+            var locUser = locUse.replace(/\./g, "");
             locUser.replace(/\./g, "");
             db.ref(RTbase + "/" + id).once("value", function (snapshot) {
                   var personObj = snapshot.val();
@@ -865,8 +866,9 @@ function rateGame(id, rateYo) {
       });
 }
 function saveRating(id, rateYo) {
-      var locUser = cookie.read("t");
-      if (locUser) {
+      var locUse = cookie.read("t");
+      if (locUse) {
+            var locUser = locUse.replace(/\./g, "");
             locUser.replace(/\./g, "");
             db.ref(RTbase + "/" + id + "/rating").once("value", function (snapshot) {
                   var itemRating = snapshot.val();

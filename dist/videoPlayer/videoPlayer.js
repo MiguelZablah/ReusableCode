@@ -1,7 +1,5 @@
 "use strict";
 
-require("./videoInitPlugIns");
-
 var videoInitPlug = function videoInitPlug() {
     try {
         videojs('video_res', {
@@ -107,8 +105,6 @@ var videoInitPlug = function videoInitPlug() {
     } catch (err) {}
 };
 videoInitPlug();
-
-
 function videoP(id, validation, vidNames, poster, catego) {
     var clubName = poster.split("sites/").pop().split("/")[0];
     if (validation == "playVid") {
@@ -121,21 +117,21 @@ function videoP(id, validation, vidNames, poster, catego) {
         for (var i = 0; i < vidArrNames.length; i++) {
             if (vidArrNames[i].indexOf("1080") > -1) {
                 var vidSrc1080 = $("<source />", {
-                    src: "/sites/\"" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
+                    src: "/sites/" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
                     "label": "1080 HD",
                     "res": "1080",
                     "type": "video/mp4"
                 });
             } else if (vidArrNames[i].indexOf("720") > -1) {
                 var vidSrc720 = $("<source />", {
-                    src: "/sites/\"" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
+                    src: "/sites/" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
                     "label": "720p",
                     "res": "720",
                     "type": "video/mp4"
                 });
             } else {
                 var vidSrc = $("<source />", {
-                    src: "/sites/\"" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
+                    src: "/sites/" + clubName + "/Categories/" + catego + "/Content/" + vidArrNames[i] + ".mp4",
                     "label": "480p",
                     "res": "480",
                     "type": "video/mp4"
@@ -182,7 +178,7 @@ function videoP(id, validation, vidNames, poster, catego) {
         $(".tembVideoCat").remove();
         $(".imgItem").show();
         var songSrc = $("<source />", {
-            src: "/sites/\"" + clubName + "/Categories/" + catego + "/Content/" + id + ".mp3",
+            src: "/sites/" + clubName + "/Categories/" + catego + "/Content/" + id + ".mp3",
             "type": "audio/mp3"
         });
         var songContainer = $("<video />", {

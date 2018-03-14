@@ -1,7 +1,8 @@
 // Funcion para guardar likes en FireBase
 function itemLike(id) {
-    var locUser = cookie.read("t");
-    if(locUser){
+    var locUse = cookie.read("t");
+    if(locUse){
+        var locUser = locUse.replace(/\./g, "");
         locUser.replace(/\./g, "");
         db.ref(`${RTbase}/${id}`).once("value", snapshot => {
             var personObj = snapshot.val();
