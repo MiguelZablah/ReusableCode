@@ -103,7 +103,7 @@
                                     <div class="card-img-text-container imgItem @clubItem.Name">
                                         <h4 class="card-title"><strong class="i18n" id="@clubItem.Name"></strong></h4>
                                         <div class="VideoCategoPlayBtn">
-                                            <i class="fa fa-play-circle" OnClick="videoP('@clubItem.Name', '@(isVideo ? "playVid" : "playSong")', '@string.Join("^-^", sinlgeVideo)', '@Url.Content(clubItem.PreviewUrl)', '@clubItem.ClubZone.Name')"></i>
+                                            <i class="fa fa-play-circle" OnClick="videoP('@clubItem.Name', '@(isVideo ? "playVid" : "playSong")', '@string.Join("^-^", sinlgeVideo)', '@Url.Content(clubItem.PreviewUrl)','@clubItem.ClubZone.Name')"></i>
                                         </div>
                                         <div id="rateYo-@clubItem.ID" class="card-rating"></div>
                                     </div>

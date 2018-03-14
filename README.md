@@ -16,16 +16,17 @@ All of this code uses JQuery
 **1. [Likes and Rating](#likes-and-rating)**<br>
 **2. [Video Player](#video-player)**<br>
 **3. [Search Bar](#search-bar)**<br>
-**4. [Pager with bootPag](#pager-with-bootPag)**<br>
+**4. [Pager with bootPag](#pager-with-bootpag)**<br>
 **5. [Cookies](#cookies)**<br>
 **6. [Local Storage](#local-storage)**<br>
-**7. [License](#license)**<br>
+
+**[MIT License](#license)**<br>
 
 ## Likes and Rating
 
 Requierd CSS and JS
 ```html
-<!-- My cookies and Local Storage controller -->
+<!-- My cookies JS -->
 <script src="cookies-min.js"></script>
 <!-- Firebase CDN -->
 <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
@@ -35,7 +36,7 @@ Requierd CSS and JS
 
 Install
 ```html
-<!-- Add cookies JS -->
+<!-- Add Likes and Rating JS and CSS -->
 <script src="likesAndRating-min.js"></script>
 <link rel="stylesheet" type="text/css" href="likesAndRating.css" />
 ```
@@ -61,14 +62,14 @@ var pageData = db.ref(RTbase);
 Html example
 ```html
 <!-- For Rating just add -->
-<div id="rateYo-(item-Id)" class="card-rating"></div>
+<div id="rateYo-item-Id" class="card-rating"></div>
 <!-- For Likes add somthing like this -->
-<div class="like-content likeRate" likeRate="(item-Id)">
+<div class="like-content likeRate" likeRate="item-Id">
     <button onclick="itemLike('item-Id')" class="btn btn-custom">
         <i class="fa fa-thumbs-up" aria-hidden="true"></i> 
         Like
     </button>
-    <span id="likeN-(item-Id)" class="likeText">0 likes</span>
+    <span id="likeN-item-Id" class="likeText">0 likes</span>
 </div>
 ```
 
@@ -133,7 +134,6 @@ Razor
     }
 }
 
-
 // Assume code will be inside a foreach with html items 
 var isVideo = false; // Check if is .mp4
 var sinlgeVideo = new List<string>(); // For multiple resolutions
@@ -183,7 +183,7 @@ Html
 
 Install
 ```html
-<!-- Add cookies JS -->
+<!-- Add Search Bar JS -->
 <script src="searchBar-min.js"></script>
 ```
 
