@@ -1,65 +1,65 @@
 var localStorage = (function(window){
 
-    // Creates and checks local storage exist
-    var createLocalStorage = function(key, value) {
-        if (key == null || key == undefined)
-            return `LocalStorage key not set: ${key}`;
+	// Creates and checks local storage exist
+	var createLocalStorage = function(key, value) {
+		if (key == null || key == undefined)
+			return `LocalStorage key not set: ${key}`;
 
-        if (value == null || value == undefined)
-            return `LocalStorage Value not set: ${name}`;
+		if (value == null || value == undefined)
+			return `LocalStorage Value not set: ${name}`;
 
-        window.localStorage.setItem(key, value);
+		window.localStorage.setItem(key, value);
 
-        if (readLocalStorage(key) != null)
-            return "Cookie created";
+		if (readLocalStorage(key) != null)
+			return "Cookie created";
 
-        return null;
-    };
+		return null;
+	};
 
-    // Read and returns value of local storage if exist
-    var readLocalStorage = function(key) {
-        if (key == null || key == undefined)
-            return `LocalStorage key not set: ${key}`;
+	// Read and returns value of local storage if exist
+	var readLocalStorage = function(key) {
+		if (key == null || key == undefined)
+			return `LocalStorage key not set: ${key}`;
 
-        var newCookie = window.localStorage.getItem(key);
+		var newCookie = window.localStorage.getItem(key);
 
-        if(newCookie.value != null)
-            return newCookie;
+		if(newCookie.value != null)
+			return newCookie;
 
-        return null;
-    };
+		return null;
+	};
 
-    // Deletes local storage and return string if success full
-    var deleteLocalStorage = function(key) {
-        if (key == null || key == undefined)
-            return `LocalStorage key not set: ${key}`;
+	// Deletes local storage and return string if success full
+	var deleteLocalStorage = function(key) {
+		if (key == null || key == undefined)
+			return `LocalStorage key not set: ${key}`;
         
-        window.localStorage.removeItem(key);
+		window.localStorage.removeItem(key);
 
-        if(readLocalStorage(key))
-            return "Cookie deleted";
+		if(readLocalStorage(key))
+			return "Cookie deleted";
         
-        return null;
-    };
+		return null;
+	};
 
-    return{
+	return{
         
-        create: function(localStorageKey, localStorageValue) {
-            return createLocalStorage(localStorageKey, localStorageValue);
-        },
+		create: function(localStorageKey, localStorageValue) {
+			return createLocalStorage(localStorageKey, localStorageValue);
+		},
         
-        read: function(localStorageKey) {
-            return readLocalStorage(localStorageKey);
-        },
+		read: function(localStorageKey) {
+			return readLocalStorage(localStorageKey);
+		},
 
-        delete: function(localStorageKey) {
-            return deleteLocalStorage(localStorageKey);
-        },
+		delete: function(localStorageKey) {
+			return deleteLocalStorage(localStorageKey);
+		},
 
-        deleteAll: function() {
-            window.localStorage.clear();
-            return "All Local Storage clear";
-        }
-    };
+		deleteAll: function() {
+			window.localStorage.clear();
+			return "All Local Storage clear";
+		}
+	};
 
 }(window));

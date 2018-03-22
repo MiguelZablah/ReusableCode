@@ -1,4 +1,4 @@
-## Reusable Code
+﻿## Reusable Code
 
 This Proyect is for documentacion and easy acces to some stuff that I use personaly but you can use it if you wish maybe it helps you some one in some place...
 
@@ -271,7 +271,7 @@ Simple Html Example Usage
 </div>
 <!-- /Pager Container -->
 <!-- PAGINATION -->
-<ul id="paginator pagination clearfix">
+<ul id="paginator" class="pagination clearfix">
     <div id="pager-pagination"></div>
 </ul>
 <!-- /PAGINATION -->
@@ -339,7 +339,7 @@ Real Example using razer foreach
 <!-- /Pager Container -->
 
 <!-- PAGINATION -->
-<ul id="paginator pagination clearfix">
+<ul id="paginator" class="pagination clearfix">
     <div id="pager-pagination"></div>
 </ul>
 <!-- /PAGINATION -->
