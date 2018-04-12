@@ -68,7 +68,7 @@ var proximus = (function($, cookieCtrl) {
 		});
 
 		$(proximusObj.lngImgClass).each(function () {
-			$(this).html(langObj[$(this).attr("src", $(this).attr("src").replace("_en", "_" + parse(proximusObj.cookieName, defaultLngName)))]);
+			$(this).html(langObj[$(this).attr("src", $(this).attr("src").replace(`_${defaultLngName}`, "_" + parse(proximusObj.cookieName, defaultLngName)))]);
 		});
 	};
 

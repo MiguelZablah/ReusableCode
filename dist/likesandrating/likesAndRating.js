@@ -13,13 +13,13 @@ function itemLike(id) {
 									var personObj = snapshot.val();
 									if (personObj) {
 												if (!personObj[locUser]) {
-															db.ref(RTbase + "/" + id + "/PersonsLiked").update(_defineProperty({}, locUser, 1));
+															db.ref(RTbase + "/" + id + "/UserLikes").update(_defineProperty({}, locUser, 1));
 															getItemLikes(id);
 												} else {
 															getItemLikes(id);
 												}
 									} else {
-												db.ref(RTbase + "/" + id).update(_defineProperty({}, "PersonsLiked", _defineProperty({}, locUser, 1)));
+												db.ref(RTbase + "/" + id).update(_defineProperty({}, "UserLikes", _defineProperty({}, locUser, 1)));
 												getItemLikes(id);
 									}
 						});
@@ -27,7 +27,7 @@ function itemLike(id) {
 }
 
 function getItemLikes(id) {
-			db.ref(RTbase + "/" + id + "/PersonsLiked").once("value", function (snapshot) {
+			db.ref(RTbase + "/" + id + "/UserLikes").once("value", function (snapshot) {
 						var personLikes = snapshot.val();
 						if (personLikes) {
 									var likes = 0;

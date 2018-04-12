@@ -8,13 +8,13 @@ function itemLike(id) {
 			var personObj = snapshot.val();
 			if (personObj) {
 				if(!personObj[locUser]){
-					db.ref(RTbase +"/" + id + "/PersonsLiked").update({ [locUser] : 1});
+					db.ref(RTbase +"/" + id + "/UserLikes").update({ [locUser] : 1});
 					getItemLikes(id);
 				}else{
 					getItemLikes(id);
 				}
 			}else{
-				db.ref(RTbase +"/" + id).update({ ["PersonsLiked"] : {[locUser] : 1} });
+				db.ref(RTbase +"/" + id).update({ ["UserLikes"] : {[locUser] : 1} });
 				getItemLikes(id);
 			}
 		});
@@ -23,7 +23,7 @@ function itemLike(id) {
 
 // Funcion para sacar los likes de FireBase
 function getItemLikes(id) {
-	db.ref(`${RTbase}/${id}/PersonsLiked`).once("value", snapshot => {
+	db.ref(`${RTbase}/${id}/UserLikes`).once("value", snapshot => {
 		const personLikes = snapshot.val();
 		if (personLikes) {
 			var likes = 0;
