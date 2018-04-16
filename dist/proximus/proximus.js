@@ -40,7 +40,6 @@ var proximus = function ($, cookieCtrl) {
 		var langObj = ObjectLang[parse(proximusObj.cookieName, defaultLngName)];
 
 		$(proximusObj.lngClass).each(function () {
-
 			try {
 				if (langObj[$(this).attr('id')]) {
 					$(this).html(langObj[$(this).attr('id')]);
