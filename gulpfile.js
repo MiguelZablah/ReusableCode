@@ -92,7 +92,7 @@ gulp.task('searchBarBuildJS', function() {
 		.pipe(gulp.dest('dist/searchBar/'));
 });
 
-// bootPage bootstrap3
+// bootPage with no bootstrap
 gulp.task('bootpagBuildJS', function() {
 	gulp.src('src/pager/js/bootpag.js')
 		.pipe(concat('bootpag.js'))
@@ -148,9 +148,9 @@ gulp.task('proximusBuildJS', function() {
 });
 
 gulp.task('default', [
-	'likeAndRatingBuildJS', 
-	'likeAndRatingBuildCSS', 
-	'cookiesBuild', 
+	'likeAndRatingBuildJS',
+	'likeAndRatingBuildCSS',
+	'cookiesBuild',
 	'localStorageBuild',
 	'videoPlayerBuildJS',
 	'videoPlayerPlugInsBuildJS',

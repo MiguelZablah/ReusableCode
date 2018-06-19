@@ -13,14 +13,42 @@ All of this code uses JQuery
 ```
 
 ## Table of Content
-**1. [Likes and Rating](#likes-and-rating)**<br>
-**2. [Video Player](#video-player)**<br>
-**3. [Search Bar](#search-bar)**<br>
-**4. [Pager with bootPag](#pager-with-bootpag)**<br>
-**5. [Cookies](#cookies)**<br>
-**6. [Local Storage](#local-storage)**<br>
+**1. [Proximus](#Proximus)**<br>
+**2. [Likes and Rating](#likes-and-rating)**<br>
+**3. [Video Player](#video-player)**<br>
+**4. [Search Bar](#search-bar)**<br>
+**5. [Pager with bootPag](#pager-with-bootpag)**<br>
+**6. [Cookies](#cookies)**<br>
+**7. [Local Storage](#local-storage)**<br>
 
 **[MIT License](#license)**<br>
+
+## Proximus
+
+Install JS
+```html
+<!-- My cookies JS -->
+<script src="cookies-min.js"></script>
+<!-- My cookies JS -->
+<script src="proximus-min.js"></script>
+```
+
+Add your Object
+```javascript
+var bundle = {
+    'en':{
+        "title":"Hello world!",
+    },
+    'es':{
+        'title': "Hola mundo",
+    }
+}
+```
+
+Initialize proximus
+```javascript
+proximus.init(bundle, 'en');
+```
 
 ## Likes and Rating
 
@@ -236,24 +264,25 @@ Search Input
 
 ## Pager with bootPag
 
-Installation using bootstrap 3
+Installation without bootstrap
 ```html
+<!-- Add cookies JS -->
+<script src="cookies-min.js"></script>
 <!-- Add bootpag CSS and JS -->
 <link rel="stylesheet" type="text/css" href="bootpag.css" />
 <script src="bootpag-min.js"></script>
-<!-- Add cookies JS -->
-<script src="cookies-min.js"></script>
 <!-- Add Pager -->
 <script src="pager-min.js"></script>
 ```
 
 Installation using bootstrap 4
 ```html
+<!-- Add bootstrap Code here -->
+<!-- Add cookies JS -->
+<script src="cookies-min.js"></script>
 <!-- Add bootpag CSS and JS -->
 <link rel="stylesheet" type="text/css" href="bootpagB4.css" />
 <script src="bootpagB4-min.js"></script>
-<!-- Add cookies JS -->
-<script src="cookies-min.js"></script>
 <!-- Add Pager -->
 <script src="pager-min.js"></script>
 ```
