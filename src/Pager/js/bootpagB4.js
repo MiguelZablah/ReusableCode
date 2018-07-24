@@ -126,7 +126,7 @@
 					"'><a class='", settings.b4aClass,"' href='", href(1), "'>", settings.first, "</a></li>"]);
 			}
 			if(settings.prev){
-				p = p.concat(["<li data-lp='1' class='", settings.prevClass,
+				p = p.concat(["<li data-lp='1' class='", settings.b4liClass," ",settings.prevClass,
 					"'><a class='", settings.b4aClass,"' href='", href(1), "'>", settings.prev, "</a></li>"]);
 			}
 			for(var c = 1; c <= Math.min(settings.total, settings.maxVisible); c++){
@@ -136,7 +136,7 @@
 			if(settings.next){
 				lp = settings.leaps && settings.total > settings.maxVisible
 					? Math.min(settings.maxVisible + 1, settings.total) : 2;
-				p = p.concat(["<li data-lp='", lp, "' class='",
+				p = p.concat(["<li data-lp='", lp, "' class='", settings.b4liClass," ",
 					settings.nextClass, "'><a class='", settings.b4aClass,"' href='", href(lp),
 					"'>", settings.next, "</a></li>"]);
 			}
