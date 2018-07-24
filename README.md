@@ -418,7 +418,7 @@ pager.init('categoryName',
 
 // Pager restar
 /*
-* Return a string that ca be use for debuging
+* Return a string that can be use for debuging
 * Deletes storage of pager in cookies
 */
 pager.restart();
@@ -463,7 +463,7 @@ Real Example using razer foreach
 
 <!-- JS for pager -->
 <script>
-    // Send categoryName(as string), pageTotal(in number), and true(for delete on indez)
+    // Send categoryName(as string), pageTotal(in number), and true(for delete on index/home)
     pager.init('@catego', @pageCounter, true);
 </script>
 <!-- /JS for pager -->
