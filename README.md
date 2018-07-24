@@ -1,6 +1,6 @@
 ﻿## Reusable Code
 
-This Proyect is for documentacion and easy acces to some stuff that I use personaly but you can use it if you wish maybe it helps you some one in some place...
+This Project is for documentation and easy acces to some stuff that I used personally but you can use it if you wish maybe it helps you or someone out there...
 
 ### Requierments
 All of this code uses JQuery
