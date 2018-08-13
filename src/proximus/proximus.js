@@ -1,13 +1,13 @@
 /* Proximus Controller */
+/* global cookie */
 var proximus = (function($, cookieCtrl) {
-    
 	var proximusObj = {
 		defaultLngName: 'en',
-		defaultcookieName: 'lnp',
+		defaultcookieName: 'lng',
 		lngByIdClass: '.i18n',
 		lngImgClass: '.imgi18n',
-		lngByAtrrClass: '.i18nattr',
-		lngAtrrName: 'lngTag'
+		lngByAtrrClass: '.i18nAtt',
+		lngAtrrName: 'data-i18n'
 	};
 
 	var replaceUrlParam = function(cookieName, paramValue) {
@@ -16,23 +16,26 @@ var proximus = (function($, cookieCtrl) {
 		document.cookie = cookieName + '=' + paramValue + '; path=/';
 		if (url.match(pattern)) {
 			window.location = url.replace(pattern, cookieName + '=' + paramValue);
-		}
-		else {
-			window.location = url + (url.indexOf('?') > 0 ? '&' : '?') + cookieName + '=' + paramValue;
+		} else {
+			window.location =
+				url + (url.indexOf('?') > 0 ? '&' : '?') + cookieName + '=' + paramValue;
 		}
 	};
 
 	var parse = function(cookieName, defaultLngName) {
-		var defaultvalue = cookieCtrl.read(cookieName) != null ? cookieCtrl.read(cookieName) : defaultLngName;
+		var defaultvalue =
+			cookieCtrl.read(cookieName) != null ? cookieCtrl.read(cookieName) : defaultLngName;
 		var result = defaultvalue,
 			tmp = [];
-		location.search.substr(1).split("&")
-			.forEach(function (item) {
+		location.search
+			.substr(1)
+			.split('&')
+			.forEach(function(item) {
 				tmp = item.split('=');
 				if (tmp[0] === cookieName) result = decodeURIComponent(tmp[1]);
 			});
-        
-		cookieCtrl.create(cookieName,result);     
+
+		cookieCtrl.create(cookieName, result);
 		return result;
 	};
 
@@ -40,37 +43,37 @@ var proximus = (function($, cookieCtrl) {
 		var langObj = ObjectLang[parse(cookieName, cookieValue)];
 
 		$(proximusObj.lngByIdClass).each(function() {
-
-			try{
-				if(langObj[$(this).attr('id')]){
+			try {
+				if (langObj[$(this).attr('id')]) {
 					$(this).html(langObj[$(this).attr('id')]);
-				}else if(!$(this).attr('id')){
+				} else if (!$(this).attr('id')) {
 					$(this).html('Missing id value');
-				}else{
+				} else {
 					$(this).html($(this).attr('id'));
 				}
-			}catch(e){
+			} catch (e) {
 				console.log(e);
 			}
-
 		});
 
 		$(proximusObj.lngByAtrrClass).each(function() {
-			try{
-				if(langObj[$(this).attr(proximusObj.lngAtrrName)]){
-                    $(this).html(langObj[$(this).attr(proximusObj.lngAtrrName)]);
-				}else if(!$(this).attr(proximusObj.lngAtrrName)){
+			try {
+				if (langObj[$(this).attr(proximusObj.lngAtrrName)]) {
+					$(this).html(langObj[$(this).attr(proximusObj.lngAtrrName)]);
+				} else if (!$(this).attr(proximusObj.lngAtrrName)) {
 					$(this).html(`Missing ${proximusObj.lngAtrrName} value`);
-				}else{
-                    $(this).html($(this).attr(proximusObj.lngAtrrName));
+				} else {
+					$(this).html($(this).attr(proximusObj.lngAtrrName));
 				}
-			}catch(e){
-                console.log(e);
+			} catch (e) {
+				console.log(e);
 			}
 		});
-		
+
+		// Note: add a wey to return object and select value by somthing like data-value  
+
 		// Note: add a way to add your tagname and change that tag name base on your obj
-        // $(proximusObj.lngAtrrClass).each(function() {
+		// $(proximusObj.lngAtrrClass).each(function() {
 		// 	try{
 		// 		if(langObj[$(this).attr('id')]){
 		// 			$(this).attr(proximusObj.lngAtrrName, langObj[$(this).attr('id')]);
@@ -84,7 +87,7 @@ var proximus = (function($, cookieCtrl) {
 
 		// Will change img src to what you difine on bundle
 		$(proximusObj.lngImgClass).each(function() {
-			if(langObj[$(this).attr(proximusObj.lngAtrrName)]){
+			if (langObj[$(this).attr(proximusObj.lngAtrrName)]) {
 				$(this).attr('src', langObj[$(this).attr(proximusObj.lngAtrrName)]);
 			}
 			// If is not in language object it will not be change
@@ -92,7 +95,11 @@ var proximus = (function($, cookieCtrl) {
 	};
 
 	return {
-		init: function(langObj, lng = proximusObj.defaultLngName, cookieName = proximusObj.defaultcookieName) {
+		init: function(
+			langObj,
+			lng = proximusObj.defaultLngName,
+			cookieName = proximusObj.defaultcookieName
+		) {
 			setupEventListeners(langObj, lng, cookieName);
 		},
 
@@ -103,9 +110,8 @@ var proximus = (function($, cookieCtrl) {
 		getVariables: function() {
 			return proximusObj;
 		}
-
 	};
-}(jQuery, cookie));
+})(jQuery, cookie);
 
 // Init
 // proximus.init(bundle, "es", "lnp");
@@ -115,7 +121,6 @@ var proximus = (function($, cookieCtrl) {
 
 // Get all variables
 // getVariables();
-
 
 // Next version without using JQuery
 // Get a NodeList of all .demo elements

@@ -1,14 +1,13 @@
 'use strict';
 
 var proximus = function ($, cookieCtrl) {
-
 	var proximusObj = {
 		defaultLngName: 'en',
-		defaultcookieName: 'lnp',
+		defaultcookieName: 'lng',
 		lngByIdClass: '.i18n',
 		lngImgClass: '.imgi18n',
-		lngByAtrrClass: '.i18nattr',
-		lngAtrrName: 'lngTag'
+		lngByAtrrClass: '.i18nAtt',
+		lngAtrrName: 'data-i18n'
 	};
 
 	var replaceUrlParam = function replaceUrlParam(cookieName, paramValue) {
@@ -26,7 +25,7 @@ var proximus = function ($, cookieCtrl) {
 		var defaultvalue = cookieCtrl.read(cookieName) != null ? cookieCtrl.read(cookieName) : defaultLngName;
 		var result = defaultvalue,
 		    tmp = [];
-		location.search.substr(1).split("&").forEach(function (item) {
+		location.search.substr(1).split('&').forEach(function (item) {
 			tmp = item.split('=');
 			if (tmp[0] === cookieName) result = decodeURIComponent(tmp[1]);
 		});
@@ -39,7 +38,6 @@ var proximus = function ($, cookieCtrl) {
 		var langObj = ObjectLang[parse(cookieName, cookieValue)];
 
 		$(proximusObj.lngByIdClass).each(function () {
-
 			try {
 				if (langObj[$(this).attr('id')]) {
 					$(this).html(langObj[$(this).attr('id')]);
@@ -91,6 +89,5 @@ var proximus = function ($, cookieCtrl) {
 		getVariables: function getVariables() {
 			return proximusObj;
 		}
-
 	};
 }(jQuery, cookie);
