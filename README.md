@@ -13,7 +13,7 @@ All of this code uses JQuery
 ```
 
 ## Table of Content
-**1. [Proximus](#proximus)**<br>
+**1. (Not longer supported) [Proximus](#proximus)**<br>
 **2. [Likes and Rating](#likes-and-rating)**<br>
 **3. [Video Player](#video-player)**<br>
 **4. [Search Bar](#search-bar)**<br>
@@ -24,6 +24,11 @@ All of this code uses JQuery
 **[MIT License](#license)**<br>
 
 ## Proximus
+
+(Not longer supported)
+
+There is a newer version witch dosen't use JQuery and will become the new supported proximus.
+[NEW PROXIMUS!](https://github.com/MiguelZablah/Proximus)
 
 Install JS
 ```html
@@ -107,11 +112,6 @@ var langObj = {
 * 3. Default cookie is 'lng', but here I set it to 'lang'.
 */
 proximus.init(langObj, 'es', 'lang');
-
-// Note: If you like you can have diferent instance of proximus by setting diferent cookies and objt
-// Example:
-proximus.init(langObj);
-proximus.init(langObj2, 'es', 'lang');
 ```
 
 Utils functions
