@@ -484,9 +484,37 @@ Function available
 * If CookieName or CokieValue null or undifine will not create cookie and will return string with error
 * If Cookie was not created return null
 * If it was creted return a string with what it was created
-* durationInDays is optional, by default its 10 days
+* It recive the following object:
+sameSite: that it has 3 options: 
+** 1 that is the default value that will not set sameSite parrameter 
+** 2 that will set the sameSite parrameter to Strict
+** 3 that will set the sameSite parrameter to Lax
+secure: that is a boolean:
+** if true it will set the secure parrameter (secure parrameter will set cookie to only be request by https)
+** if false it will not set parrameter
+** by default is False. 
+httpOnly: that is a boolean:
+** if true it will set the httpOnlt parrameter (HTTP-only cookies aren't accessible via JavaScript through the Document.cookie)
+** if false it will not set parrameter
+** by default is False. 
+path: that is a string:
+** it will set the page path if sent
+** by default is '/'
+domain: this is a string:
+** it will set the cookie domain
+** by default is null and it will not set parrameter (defaults to the host portion of the current document location (but not including subdomains))
+days: that is a number:
+** it will set the duration of the cookie in days
+** by default is 0 (this will leave the cookie active until browser is close)
 */
-cookie.create(cookieName, cookieValue, durationInDays);
+cookie.create(cookieName, cookieValue, { 
+	sameSite = 3, 
+	secure = true,
+	httpOnly = true, 
+	path = '/about',
+	domain = 'example.com'
+	days = 10 
+});
 
 // Read Cookie
 /*
