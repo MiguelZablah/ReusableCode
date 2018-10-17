@@ -8,17 +8,19 @@ const stripCssComments = require('gulp-strip-css-comments');
 
 // Likes and Rating
 gulp.task('likeAndRatingBuildJS', function() {
-	gulp.src('src/likesAndRating/js/*.js')
+	return gulp
+		.src('src/likesAndRating/js/*.js')
 		.pipe(concat('likesAndRating.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/likesandrating/'));
 });
 gulp.task('likeAndRatingBuildCSS', function() {
-	gulp.src('src/likesAndRating/css/*.css')
+	return gulp
+		.src('src/likesAndRating/css/*.css')
 		.pipe(concat('likesAndRating.css'))
 		.pipe(stripCssComments())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
@@ -27,11 +29,12 @@ gulp.task('likeAndRatingBuildCSS', function() {
 
 // Cookies
 gulp.task('cookiesBuild', function() {
-	gulp.src('src/cookies/*.js')
+	return gulp
+		.src('src/cookies/*.js')
 		.pipe(concat('cookies.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/cookies/'));
@@ -39,11 +42,12 @@ gulp.task('cookiesBuild', function() {
 
 // Local Storage
 gulp.task('localStorageBuild', function() {
-	gulp.src('src/localStorage/*.js')
+	return gulp
+		.src('src/localStorage/*.js')
 		.pipe(concat('localStorage.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/localStorage/'));
@@ -51,11 +55,12 @@ gulp.task('localStorageBuild', function() {
 
 // Video Player for download confirm an category use
 gulp.task('videoPlayerBuildJS', function() {
-	gulp.src('src/videoPlayer/*.js')
+	return gulp
+		.src('src/videoPlayer/*.js')
 		.pipe(concat('videoPlayer.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/videoPlayer/'));
@@ -63,17 +68,19 @@ gulp.task('videoPlayerBuildJS', function() {
 
 // All video Player PlugIns
 gulp.task('videoPlayerPlugInsBuildJS', function() {
-	gulp.src('src/videoPlayerPlugIns/js/*.js')
+	return gulp
+		.src('src/videoPlayerPlugIns/js/*.js')
 		.pipe(concat('videoPlayerPlugIns.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/videoPlayerPlugIns/'));
 });
 gulp.task('videoPlayerPlugInsBuildCSS', function() {
-	gulp.src('src/videoPlayerPlugIns/css/*.css')
+	return gulp
+		.src('src/videoPlayerPlugIns/css/*.css')
 		.pipe(concat('videoPlayerPlugIns.css'))
 		.pipe(stripCssComments())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
@@ -82,11 +89,12 @@ gulp.task('videoPlayerPlugInsBuildCSS', function() {
 
 // Search Bar with plugIn
 gulp.task('searchBarBuildJS', function() {
-	gulp.src('src/SearchBar/*.js')
+	return gulp
+		.src('src/SearchBar/*.js')
 		.pipe(concat('searchBar.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/searchBar/'));
@@ -94,11 +102,12 @@ gulp.task('searchBarBuildJS', function() {
 
 // bootPage with no bootstrap
 gulp.task('bootpagBuildJS', function() {
-	gulp.src('src/pager/js/bootpag.js')
+	return gulp
+		.src('src/pager/js/bootpag.js')
 		.pipe(concat('bootpag.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/pager/'));
@@ -106,11 +115,12 @@ gulp.task('bootpagBuildJS', function() {
 
 // bootPage bootstrap4
 gulp.task('bootpagB4BuildJS', function() {
-	gulp.src('src/pager/js/bootpagB4.js')
+	return gulp
+		.src('src/pager/js/bootpagB4.js')
 		.pipe(concat('bootpagB4.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/pager/'));
@@ -118,18 +128,20 @@ gulp.task('bootpagB4BuildJS', function() {
 
 // Build Pager Css no minify
 gulp.task('pagerBuildCss', function() {
-	gulp.src('src/pager/css/*.css')
+	return gulp
+		.src('src/pager/css/*.css')
 		.pipe(stripCssComments())
 		.pipe(gulp.dest('dist/pager/'));
 });
 
 // Pager for bootpag and bootpagB4
 gulp.task('pagerBuildJS', function() {
-	gulp.src('src/pager/js/pager.js')
+	return gulp
+		.src('src/pager/js/pager.js')
 		.pipe(concat('pager.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/pager/'));
@@ -137,17 +149,31 @@ gulp.task('pagerBuildJS', function() {
 
 // Proximus language changer
 gulp.task('proximusBuildJS', function() {
-	gulp.src('src/proximus/*.js')
+	return gulp
+		.src('src/proximus/*.js')
 		.pipe(concat('proximus.js'))
 		.pipe(stripJsComments())
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/env']
 		}))
 		.pipe(minify())
 		.pipe(gulp.dest('dist/proximus/'));
 });
 
-gulp.task('default', [
+// Proximus language changer
+gulp.task('TriviaBuildJS', function() {
+	return gulp
+		.src('src/Trivia/*.js')
+		.pipe(concat('Trivia.js'))
+		.pipe(stripJsComments())
+		.pipe(babel({
+			presets: ['@babel/env']
+		}))
+		.pipe(minify())
+		.pipe(gulp.dest('dist/Trivia/'));
+});
+
+gulp.task('default', gulp.series([
 	'likeAndRatingBuildJS',
 	'likeAndRatingBuildCSS',
 	'cookiesBuild',
@@ -160,5 +186,6 @@ gulp.task('default', [
 	'bootpagB4BuildJS',
 	'pagerBuildCss',
 	'pagerBuildJS',
-	'proximusBuildJS'
-]);
+	'proximusBuildJS',
+	'TriviaBuildJS'
+], done => done()));
